@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt";
-import strictTransportSecurity from "helmet/dist/types/middlewares/strict-transport-security/index.js";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 
@@ -43,6 +42,7 @@ export const register = async (req, res) => {
 // LOGIN USER
 export const login = async (req, res) => {
   try {
+    // basic set up, not 100% secure
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
     if (!user) return res.status(400).json({ msg: "User does not exist." });
